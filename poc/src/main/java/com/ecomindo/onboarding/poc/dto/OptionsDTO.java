@@ -1,6 +1,8 @@
 package com.ecomindo.onboarding.poc.dto;
 
-public class OptionsDTO {
+import com.fasterxml.jackson.annotation.JsonAlias;
+
+public class OptionsDTO {	
 	private Object label;
 	private Object value;
 
@@ -11,7 +13,6 @@ public class OptionsDTO {
 	public OptionsDTO(Object label, Object value) {
 		this.label = label;
 		this.value = value;
-
 	}
 
 	public Object getLabel() {
