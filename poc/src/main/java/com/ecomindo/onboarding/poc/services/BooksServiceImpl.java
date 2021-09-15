@@ -1,5 +1,11 @@
 package com.ecomindo.onboarding.poc.services;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +18,9 @@ public class BooksServiceImpl implements BooksService {
 	@Autowired
 	BooksDao booksDao;
 
+	private ExecutorService executor = Executors.newFixedThreadPool(2);
+
+	@Transactional
 	@Override
 	public BooksModel insert(String title, String description, String author) {
 		try {
@@ -22,4 +31,11 @@ public class BooksServiceImpl implements BooksService {
 		}
 	}
 
+	@Override
+	public Future<BooksModel> insertLongTime(String title, String description, String author) {
+		return executor.submit(() -> {
+			Thread.sleep(10000);
+			return insert(title, description, author);
+		});
+	}
 }

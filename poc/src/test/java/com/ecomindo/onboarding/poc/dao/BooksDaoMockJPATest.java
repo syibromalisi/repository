@@ -26,8 +26,8 @@ public class BooksDaoMockJPATest {
     @BeforeEach
     public void init() {
     	// given
-    	BooksModel book1 = new BooksModel("test1","test description1", "test author1");
-    	entityManager.persist(book1);
+//    	BooksModel book1 = new BooksModel("test1","test description1", "test author1");
+//    	entityManager.persist(book1);
     	
     	BooksModel book2 = new BooksModel("test2","test description2", "test author2");
         entityManager.persist(book2);

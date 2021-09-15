@@ -2,6 +2,7 @@ package com.ecomindo.onboarding.poc.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Future;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class BooksController {
 
 	@Autowired
 	BooksService booksService;
-	
+
 	@GetMapping("/get-books")
 	public ResponseEntity<List<BooksModel>> getAllBooks(@RequestParam(required = false) String title) {
 		try {
@@ -98,11 +99,11 @@ public class BooksController {
 		ResponseDTO response = new ResponseDTO();
 		try {
 			BooksModel book = booksService.insert(books.getTitle(), books.getDescription(), books.getAuthor());
-			
+
 			response.setCode("200");
 			response.setMessage("Insert Success");
 			response.setData(book);
-			
+
 			return response;
 		} catch (Exception e) {
 			response.setCode("500");
@@ -111,4 +112,84 @@ public class BooksController {
 		}
 	}
 
+	@PostMapping("/insert-future")
+	public ResponseDTO insertUsingFuture(@RequestBody BooksModel books) {
+		ResponseDTO response = new ResponseDTO();
+		try {
+			Future<BooksModel> future = booksService.insertLongTime(books.getTitle(), books.getDescription(),
+					books.getAuthor());
+
+			while (!future.isDone()) {
+				System.out.println("Waiting for database process...");
+				Thread.sleep(300);
+			}
+
+			BooksModel book = future.get();
+
+			response.setCode("200");
+			response.setMessage("Insert Success");
+			response.setData(book);
+
+			return response;
+		} catch (Exception e) {
+			response.setCode("500");
+			response.setMessage("Insert Failed");
+			return response;
+		}
+	}
+
+	@PostMapping("/insert-future2")
+	public ResponseDTO insertUsingFuture2(@RequestBody BooksModel books) {
+		ResponseDTO response = new ResponseDTO();
+		try {
+			Future<BooksModel> future1 = booksService.insertLongTime(books.getTitle() + "1", books.getDescription(), books.getAuthor());
+			Future<BooksModel> future2 = booksService.insertLongTime(books.getTitle() + "2", books.getDescription(), books.getAuthor());
+			Future<BooksModel> future3 = booksService.insertLongTime(books.getTitle() + "3", books.getDescription(), books.getAuthor());
+			
+			while (!(future1.isDone() && future2.isDone() && future3.isDone())) {
+			    if(future1.isDone()) {
+			    	System.out.println("future1 is done");
+			    } else {
+			    	System.out.println("future1 is not done");
+			    }
+			    if(future2.isDone()) {
+			    	System.out.println("future2 is done");
+			    }
+			    else {
+			    	System.out.println("future2 is not done");
+			    }
+			    if(future3.isDone()) {
+			    	System.out.println("future3 is done");
+			    }
+			    else {
+			    	System.out.println("future3 is not done");
+			    }
+			    
+//				System.out.println(
+//			      String.format(
+//			        "future1 is %s and future2 is %s and future3 is %s", 
+//			        future1.isDone() ? "done" : "not done", 
+//			        future2.isDone() ? "done" : "not done",
+//			        future3.isDone() ? "done" : "not done"
+//			      )
+//			    );
+			    Thread.sleep(300);
+			}
+
+			ArrayList<BooksModel> res = new ArrayList();
+			res.add(future1.get());
+			res.add(future2.get());
+			res.add(future3.get());
+			
+			response.setCode("200");
+			response.setMessage("Insert Success");
+			response.setData(res);
+			
+			return response;
+		} catch (Exception e) {
+			response.setCode("500");
+			response.setMessage("Insert Failed");
+			return response;
+		}
+	}
 }

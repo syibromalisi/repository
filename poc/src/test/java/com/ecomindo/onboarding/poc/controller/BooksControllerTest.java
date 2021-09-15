@@ -2,6 +2,7 @@ package com.ecomindo.onboarding.poc.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +22,7 @@ public class BooksControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
-    
+        
     @Test
     public void test_insert() {
     	url = String.format("http://localhost:%d/books/insert", port);
@@ -30,4 +31,5 @@ public class BooksControllerTest {
     	ResponseDTO result = this.restTemplate.postForObject(url, request, ResponseDTO.class);
     	assertThat(result.getCode().equals("200"));
     }
+    
 }
