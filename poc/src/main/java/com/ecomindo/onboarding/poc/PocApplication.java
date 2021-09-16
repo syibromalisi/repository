@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.ecomindo.onboarding.poc.kafka.services.KafkaConsumer;
-
+ 
 @SpringBootApplication
 public class PocApplication {
 
