@@ -41,6 +41,7 @@ public class Kafka {
 
 	@Bean
 	public NewTopic topic1() {
+		// create topic
 		return new NewTopic(config.getKafkaTopic(), 1, (short) 1);
 	}
 
@@ -80,6 +81,7 @@ public class Kafka {
 	
 	@Bean
     public KafkaConsumer messageListener() {
+		System.out.println("Kafka listener starting.");
         return new KafkaConsumer();
     }
 }

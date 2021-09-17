@@ -27,7 +27,7 @@ public class JobInsertDataService extends QuartzJobBean {
 			String description = jobDataMap.getString("description");
 			String author = jobDataMap.getString("author");
 
-			bookService.insert(title, description, author);
+//			bookService.insert(title, description, author);
 		} catch (Exception e) {
 			logger.error("Failed to send insert.", e);
 			throw e;

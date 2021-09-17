@@ -31,7 +31,7 @@ public class JobInsertData2Service implements Job {
 			String description = String.format("Test description %s", formattedDate);
 			String author = String.format("Test author %s", formattedDate);
 
-			bookService.insert(title, description, author);
+//			bookService.insert(title, description, author);
 		} catch (Exception e) {
 			logger.error("Failed to send insert.", e);
 			throw e;

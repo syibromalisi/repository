@@ -12,11 +12,7 @@ import com.ecomindo.onboarding.poc.kafka.services.KafkaConsumer;
 public class PocApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PocApplication.class, args);
-		
-//		ConfigurableApplicationContext context = SpringApplication.run(PocApplication.class, args);
-//
-//		KafkaConsumer listener = context.getBean(KafkaConsumer.class);
+		SpringApplication.run(PocApplication.class, args);		
 	}
 
 }

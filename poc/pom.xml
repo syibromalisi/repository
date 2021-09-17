@@ -12,7 +12,7 @@
 	<groupId>com.ecomindo.onboarding</groupId>
 	<artifactId>poc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>poc</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>

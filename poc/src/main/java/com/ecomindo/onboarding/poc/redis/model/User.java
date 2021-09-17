@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.springframework.data.redis.core.RedisHash;
 
-@RedisHash(value = "User", timeToLive = 300)
+@RedisHash(value = "User")
 public class User implements Serializable {
 	private String id;
 	private String name;
