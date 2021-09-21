@@ -2,17 +2,14 @@ package com.ecomindo.onboarding.poc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import co.elastic.apm.attach.ElasticApmAttacher;
 
-import com.ecomindo.onboarding.poc.kafka.services.KafkaConsumer;
- 
 @SpringBootApplication
 public class PocApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PocApplication.class, args);		
+		ElasticApmAttacher.attach();
+		SpringApplication.run(PocApplication.class, args);
 	}
 
 }

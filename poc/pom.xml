@@ -105,6 +105,13 @@
 			<version>2.7.6</version>
 		</dependency>
 
+		<!-- apm agents -->
+		<dependency>
+			<groupId>co.elastic.apm</groupId>
+			<artifactId>apm-agent-attach</artifactId>
+			<version>1.26.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
